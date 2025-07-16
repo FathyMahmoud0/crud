@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="mb-4">
+        <i class="bi bi-person-plus"></i> 
+        {% if student %}Update Student{% else %}Create New Student{% endif %}
+    </h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        {% comment %} <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" 
+                   value="{% if student %}{{ student.name }}{% endif %}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   value="{% if student %}{{ student.email }}{% endif %}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address"
+                   value="{% if student %}{{ student.address }}{% endif %}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="image" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="image" name="image">
+            {% if student and student.image %}
+                <div class="mt-2">
+                    <img src="{{ student.image.url }}" alt="Current photo" class="student-img">
+                    <small class="text-muted ms-2">Current photo</small>
+                </div>
+            {% endif %} {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+        
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Save
+        </button>
+        <a href="{% url 'student_list'%}" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

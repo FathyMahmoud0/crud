@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container text-center">
+    <h2 class="mb-4 text-danger"><i class="bi bi-exclamation-triangle"></i> Confirm Delete</h2>
+    
+    <div class="alert alert-warning mb-4">
+        <p>Are you sure you want to delete student <strong>{{ student.name }}</strong>?</p>
+        {% if student.image.name != 'default.jpg' %}
+        <p class="mb-0">This will also delete the student's photo.</p>
+        {% endif %}
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Yes, Delete
+        </button>
+        <a href="{% url 'student_list' %}" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}
